@@ -1,5 +1,6 @@
 from MotorDriver import Motor 
 from GyroDriver import Gyro
+from PID import PID
 from time import sleep
 import RPi.GPIO as GPIO
 
@@ -22,7 +23,7 @@ def MotorTest(ENA, IN1, IN2, ENB, IN3, IN4):
     left.controller(100, Motor.BACKWARD)
     right.controller(100, Motor.BACKWARD)
     sleep(6)
-    left.controller(0, Mortr.STOP)
+    left.controller(0, Motor.STOP)
     right.controller(0, Motor.STOP)
     GPIO.cleanup()
 
@@ -32,7 +33,14 @@ def GyroTest():
         data = gyro.get_acc_data()
         print(gyro.get_y_slope(data['acc_x'], data['acc_y'], data['acc_z']))
 
+def PIDTest():
+    pid = PID(160.0, 360.0, 5.0, 0)
+    while True:
+        output = pid.controller()
+        pid.balancing(output)
+
 if __name__ == "__main__":
-    GyroTest()
+    # GyroTest()
     # MotorTest()
+    PIDTest()
 
