@@ -1,5 +1,11 @@
-# -*- coding: utf-8 -*-
 import RPi.GPIO as GPIO
+
+
+OUTPUT = 1
+INPUT = 0
+
+HIGH = 1
+LOW = 0
 
 
 class Motor:
@@ -8,20 +14,14 @@ class Motor:
     FORWARD  = 1
     BACKWARD= 2
 
-    OUTPUT = 1
-    INPUT = 0
-
-    HIGH = 1
-    LOW = 0
-
     def __init__(self, en, ina, inb):
+        GPIO.setmode(GPIO.BCM)
         self.pwm = self.setConfig(en, ina, inb)
         self.ina = ina
         self.inb = inb
         self.en = en
     
-    @staticmethod
-    def setConfig(en, ina, inb):
+    def setConfig(self, en, ina, inb):
         GPIO.setup(en, GPIO.OUT)
         GPIO.setup(ina, GPIO.OUT)
         GPIO.setup(inb, GPIO.OUT)
@@ -29,16 +29,16 @@ class Motor:
         pwm.start(0)
         return pwm
 
-    def controller(speed, stat):
+    def controller(self, speed, stat):
         self.pwm.ChangeDutyCycle(speed)
 
-        if stat == FORWARD:
+        if stat == Motor.FORWARD:
             GPIO.output(self.ina, HIGH)
             GPIO.output(self.inb, LOW)
-        elif stat == BACKWARD:
+        elif stat == Motor.BACKWARD:
             GPIO.output(self.ina, LOW)
             GPIO.output(self.inb, HIGH)
-        elif stat == STOP:
+        elif stat == Motor.STOP:
             GPIO.output(self.ina, LOW)
             GPIO.output(self.inb, LOW)
 

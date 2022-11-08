@@ -16,9 +16,9 @@ class Gyro:
     GYRO_YOUT_H  = 0x45
     GYRO_ZOUT_H  = 0x47
     Device_Address = 0x68
-    self.bus = smbus.SMBus(1) 
     	
     def __init__(self):
+        self.bus = smbus.SMBus(1) 
     	self.bus.write_byte_data(Device_Address, SMPLRT_DIV, 7)
     	self.bus.write_byte_data(Device_Address, PWR_MGMT_1, 1)
     	self.bus.write_byte_data(Device_Address, CONFIG, 0)
