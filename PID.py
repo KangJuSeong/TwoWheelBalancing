@@ -23,8 +23,8 @@ class PID:
         self.output = 0
         self.goal = goal
         self.gyro = Gyro()
-        self.left = Motor(ENA, IN1, IN2)
-        self.right = Motor(ENB, IN3, IN4)
+        self.left = Motor(ENB, IN1, IN2)
+        self.right = Motor(ENA, IN3, IN4)
 
     def controller(self):
         data = self.gyro.get_acc_data()
