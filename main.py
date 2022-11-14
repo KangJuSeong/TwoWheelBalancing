@@ -10,8 +10,8 @@ IN1 = 19
 IN2 = 13
 
 ENB = 0
-IN3 = 6 # 5
-IN4 = 5 # 6
+IN3 = 5 # 5
+IN4 = 6 # 6
 
 def MotorTest(ENA, IN1, IN2, ENB, IN3, IN4):
     left = Motor(ENB, IN1, IN2)
@@ -34,7 +34,8 @@ def GyroTest():
         print(gyro.get_y_slope(data['acc_x'], data['acc_y'], data['acc_z']))
 
 def PIDTest():
-    pid = PID(200.0, 360.0, 5.0, 0)
+    # 1600 3500 50 12
+    pid = PID(1700.0, 3600.0, 45.0, 11)
     while True:
         output = pid.controller()
         pid.balancing(output)
@@ -43,4 +44,5 @@ if __name__ == "__main__":
     # GyroTest()
     # MotorTest(ENA, IN1, IN2, ENB, IN3, IN4)
     PIDTest()
+
 

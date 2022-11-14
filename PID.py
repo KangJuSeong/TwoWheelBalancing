@@ -6,8 +6,8 @@ IN1 = 19
 IN2 = 13
 
 ENB = 0
-IN3 = 6
-IN4 = 5
+IN3 = 5
+IN4 = 6
 
 class PID:
     def __init__(self, kp, ki, kd, goal):
